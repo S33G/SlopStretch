@@ -16,7 +16,7 @@ original = source / 'target/release' / ('plugin-standalone.exe' if windows else 
 bundle = source / 'target/bundled/SlopStretch.vst3'
 assert original.is_file() and bundle.is_dir()
 commit = subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD'], text=True).strip()
-install = ('Run SlopStretch.exe. Copy SlopStretch.vst3 to C:\\Program Files\\Common Files\\VST3 and rescan your DAW. Windows x64. Unsigned binaries; Windows may show a reputation warning.' if windows else 'Run ./SlopStretch (chmod +x SlopStretch if your extractor drops permissions). Copy SlopStretch.vst3 to ~/.vst3/ and rescan your DAW. Built on Ubuntu 24.04 x64; requires glibc 2.39 or newer, ALSA, X11/XWayland and OpenGL. File dialogs use the desktop portal.')
+install = ('Run SlopStretch.exe. Copy SlopStretch.vst3 to C:\\Program Files\\Common Files\\VST3 and rescan your DAW. Windows x64. Unsigned binaries; Windows may show a reputation warning.' if windows else 'Run ./SlopStretch (chmod +x SlopStretch if your extractor drops permissions). Copy SlopStretch.vst3 to ~/.vst3/ and rescan your DAW. Built on Ubuntu 24.04 x64; requires glibc 2.39 or newer, ALSA, X11/XWayland, OpenGL and Wayland client libraries. File dialogs use the desktop portal.')
 checksums = []
 with tempfile.TemporaryDirectory() as temp:
     for kind in ['Desktop', 'Standalone', 'VST3']:
@@ -32,7 +32,7 @@ with tempfile.TemporaryDirectory() as temp:
         licenses.mkdir()
         for path in [source / 'LICENSE-MIT', source / 'LICENSE-APACHE', source / 'vendor/rvst/THIRD_PARTY_LICENSES.txt', source / 'vendor/rvst/THIRD_PARTY_NOTICES.md', *sorted((source / 'crates/plugin-ui/assets/fonts').glob('*OFL.txt'))]:
             shutil.copy2(path, licenses / path.name)
-        hashes = {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file()}
+        hashes = {p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file()}
         (root / 'BUILD-INFO.json').write_text(json.dumps({'source_commit': commit, 'source_tag': 'v0.1.0', 'platform': platform, 'rust': subprocess.check_output(['rustc', '--version'], text=True).strip(), 'sha256': hashes}, indent=2))
         archive = output / (name + '.zip')
         with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED) as z:
