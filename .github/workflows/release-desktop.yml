@@ -1,0 +1,79 @@
+name: Desktop release
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/release-desktop.yml
+      - scripts/package-desktop.py
+permissions:
+  contents: read
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-2022
+            platform: Windows-x64
+            binary: Contents/x86_64-win/SlopStretch.vst3
+          - os: ubuntu-24.04
+            platform: Linux-x64
+            binary: Contents/x86_64-linux/SlopStretch.so
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: source
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: tooling
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.1.0
+          path: source
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.98.0
+          components: rustfmt, clippy
+      - if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libasound2-dev libx11-dev libxcursor-dev libxi-dev libgl1-mesa-dev libxrandr-dev
+      - run: cargo test --workspace --locked
+      - run: cargo fmt --all --check
+      - run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      - run: cargo build --release --locked -p plugin-standalone --no-default-features
+      - run: cargo xtask bundle vst3 --release
+      - name: Exercise real VST3 ABI
+        run: cargo run --manifest-path vendor/rvst/Cargo.toml -p rvst-vst3 --example vst3-host-smoke --locked -- "$PWD/target/bundled/SlopStretch.vst3/${{ matrix.binary }}"
+      - name: Render and validate audio
+        run: cargo run --release --locked -p plugin-core --example render_demo -- target/audio-check
+      - name: Check standalone executable loads
+        run: |
+          python - <<'PY'
+          import os, subprocess
+          exe = 'target/release/plugin-standalone' + ('.exe' if os.name == 'nt' else '')
+          result = subprocess.run([exe, '--slop-release-smoke'], capture_output=True, text=True)
+          print(result.stdout, result.stderr)
+          assert result.returncode != 0 and 'unknown argument' in result.stderr.lower()
+          PY
+      - name: Package standalone and VST3
+        run: python ../tooling/scripts/package-desktop.py . ../packages '${{ matrix.platform }}'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}
+          path: packages/*
+  publish:
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: packages
+          merge-multiple: true
+      - name: Attach verified packages to v0.1.0
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh release upload v0.1.0 packages/*
