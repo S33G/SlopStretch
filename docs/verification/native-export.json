@@ -1,0 +1,10 @@
+{
+  "file": "dist/audio/native-bake.wav",
+  "format": "WAVE_FORMAT_EXTENSIBLE IEEE float32 stereo",
+  "sample_rate": 48000,
+  "seconds": 30.0,
+  "frames": 1440000,
+  "peak": 0.058217842131853104,
+  "rms": 0.008094413045338564,
+  "bytes": 11520068
+}

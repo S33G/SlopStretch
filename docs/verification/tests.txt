@@ -1,0 +1,83 @@
+   Compiling plugin-core v0.1.0 (/private/tmp/slopstretch/crates/plugin-core)
+   Compiling plugin-ui v0.1.0 (/private/tmp/slopstretch/crates/plugin-ui)
+   Compiling xtask v0.1.0 (/private/tmp/slopstretch/crates/xtask)
+   Compiling plugin-standalone v0.1.0 (/private/tmp/slopstretch/crates/plugin-standalone)
+   Compiling plugin-native v0.1.0 (/private/tmp/slopstretch/crates/plugin-native)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.06s
+     Running unittests src/lib.rs (target/debug/deps/plugin_core-ed262e3585af59a1)
+
+running 10 tests
+test tests::one_x_is_exact_selected_source_and_freeze_holds_position ... ok
+test tests::descriptor_demo_and_silence_until_play ... ok
+test tests::streamed_render_uses_new_file_and_cancellation_removes_partial ... ok
+test tests::wav_import_export_duration_selection_dry_bypass_and_limits ... ok
+test tests::state_restores_embedded_source_and_rejects_corruption_atomically ... ok
+test tests::capture_resamples_input_and_f64_matches_f32 ... ok
+test tests::concurrent_source_publication_keeps_audio_finite ... ok
+test tests::callback_is_allocation_free_through_commands_and_automation ... ok
+test tests::fft_stretch_preserves_pitch_and_slows_source_time ... ok
+test tests::full_host_rate_range_capture_and_stretch_preserve_time_without_allocating ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.62s
+
+     Running unittests src/lib.rs (target/debug/deps/plugin_native-2b826039b89fdb24)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/plugin_standalone-e6def389961bc709)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/plugin_ui-6b318e5313e6df24)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/editor.rs (target/debug/deps/editor-217b76c9704fc8d5)
+
+running 7 tests
+test waveform_drag_makes_an_ordered_region_and_balanced_pair ... ok
+test reversed_host_region_remains_editable_at_its_visible_left_edge ... ok
+test host_history_shortcuts_remain_available_after_knob_focus ... ok
+test first_factory_preset_applies_from_initial_selection_as_one_group ... ok
+test loader_skip_and_transport_shortcuts_operate_the_real_controls ... ok
+test knob_keyboard_bounds_and_drag_close_the_host_gesture ... ok
+test loader_and_normal_editor_tessellate_at_native_and_minimum_canvas_sizes ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.55s
+
+     Running unittests src/lib.rs (target/debug/deps/plugin_web-9ee60db4bfdfb56f)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/xtask-9d789e08764f3877)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests plugin_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests plugin_ui
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests plugin_web
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

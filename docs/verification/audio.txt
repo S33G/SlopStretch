@@ -1,0 +1,6 @@
+   Compiling plugin-core v0.1.0 (/private/tmp/slopstretch/crates/plugin-core)
+    Finished `release` profile [optimized] target(s) in 3.11s
+     Running `target/release/examples/render_demo dist/audio`
+dist/audio/01-before.wav: 3.0s, 288000 samples, peak=0.116531, rms=0.020853, rendered in 0.006s
+dist/audio/02-cathedral-but-sad.wav: 24.0s, 2304000 samples, peak=0.157545, rms=0.028949, rendered in 0.278s
+dist/audio/03-emotional-support.wav: 12.0s, 1152000 samples, peak=0.174228, rms=0.040219, rendered in 0.138s

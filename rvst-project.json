@@ -1,0 +1,18 @@
+{
+  "inputs": {
+    "crate_name": "slopstretch",
+    "email": "support@example.com",
+    "kind": "gain",
+    "plugin_id": "audio.slop.slopstretch",
+    "plugin_name": "SlopStretch",
+    "url": "https://example.com",
+    "vendor": "Slop Audio"
+  },
+  "schema_version": 1,
+  "sdk": "vendor/rvst",
+  "sdk_development_override": true,
+  "sdk_vendored": true,
+  "sdk_version_requirement": "^0.1",
+  "template": "builtin:gain@0.1.0",
+  "template_version": "0.1.0"
+}

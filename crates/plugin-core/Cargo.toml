@@ -1,0 +1,13 @@
+[package]
+name = "plugin-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+rvst-core = { path = "../../vendor/rvst/crates/rvst-core" }
+rvst-runtime = { path = "../../vendor/rvst/crates/rvst-runtime" }
+hound = "3.5"
+
+[dev-dependencies]
+rvst-test = { path = "../../vendor/rvst/crates/rvst-test" }

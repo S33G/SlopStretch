@@ -1,0 +1,16 @@
+[package]
+name = "plugin-ui"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+rvst-core = { path = "../../vendor/rvst/crates/rvst-core" }
+rvst-ui = { path = "../../vendor/rvst/crates/rvst-ui" }
+plugin-core = { path = "../plugin-core" }
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+rfd = "0.15.4"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen-futures = "0.4"
