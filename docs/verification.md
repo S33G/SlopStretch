@@ -68,8 +68,8 @@ skipped because no validator path was configured. The generic `auval` heading
 in that VST3 log is not evidence of an AU build or AU validation.
 
 No DAW session, DAW capture routing, host project save/reopen, extended playback
-soak, or subjective listening qualification is claimed. Windows, Linux, Intel
-macOS, AU, and AAX have not been built or qualified in this run. The browser
+soak, or subjective listening qualification is claimed. Intel macOS, AU, and AAX have not been built. Windows/Linux build and smoke
+evidence is recorded below; neither platform has been DAW-qualified. The browser
 runner is an editor preview and does not process audio.
 
 The packaged executable SHA-256 values at this verification point are:
@@ -82,3 +82,35 @@ SlopStretch.clap: 010a9c4f245799ac67b3420f576d84fdbfb204883de28a5d11a883d6adec88
 
 The hashes identify each bundle's `Contents/MacOS/SlopStretch` executable.
 Rebuilding or signing again can change them.
+
+## Windows and Linux release packages
+
+[Native release run](https://github.com/S33G/SlopStretch/actions/runs/41172186298)
+built the unchanged `v0.1.0` source (`e855161f0197be228cf4eb06404c6586c5de671e`)
+on Windows Server 2022 x64 and Ubuntu 24.04 x64 with Rust 1.98.0.
+Both platforms passed:
+
+- All 17 workspace tests, formatting, and workspace/all-target Clippy with warnings denied.
+- Release standalone compilation with developer tooling disabled, plus VST3 bundling.
+- Loading the actual VST3 binary, instantiating its component/controller, and processing
+  eight 64-frame blocks at 48 kHz with finite output and 11 exposed parameters.
+- Three offline WAV renders (original, stretched, frozen), with finite nonzero samples
+  and bounded peaks. These exercise DSP; the generic VST3 smoke alone permits silence.
+- Standalone executable loading and argument parsing. This does not open an audio device.
+- ZIP integrity and per-file SHA-256 verification before upload.
+
+Each platform has combined Desktop, standalone-only, and VST3-only ZIPs, with
+installation instructions, licenses, build provenance, and platform checksum files.
+Linux ZIPs preserve executable permissions. Linux targets glibc 2.39 or newer and
+requires ALSA, X11/XWayland, OpenGL, Wayland client libraries, and a desktop portal
+for native file dialogs. Windows binaries are unsigned and import `VCRUNTIME140.dll`;
+the Microsoft Visual C++ v14 x64 Redistributable must be installed.
+
+Windows/Linux interactive editor use, physical audio-device playback, file dialogs,
+DAW project save/reopen, and extended playback have not been qualified. The Mac
+pluginval and CLAP results above do not extend to Windows or Linux.
+
+All eight published Windows/Linux assets were downloaded again. Their SHA-256
+values match GitHub asset digests and the published checksum files. Every ZIP
+passed integrity checks; embedded files match BUILD-INFO.json, source provenance
+matches v0.1.0, and Linux standalone executable permissions survive packaging.

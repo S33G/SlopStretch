@@ -26,8 +26,15 @@ the result into a WAV and put it underneath the pad underneath your other pad.
 
 ## 🥄 Your first serving of Slop
 
-Open **SlopStretch.app** for a standalone session, or use the **VST3 / CLAP**
-effect in a compatible host. The current packaged build is for Apple Silicon Mac.
+Grab your serving from the [v0.1.0 downloads](https://github.com/S33G/SlopStretch/releases/tag/v0.1.0):
+
+- **Windows x64:** standalone app + VST3. Open **SlopStretch.exe**.
+- **Linux x64:** standalone app + VST3. Run **SlopStretch**. Built for Ubuntu 24.04 or compatible systems.
+- **Apple Silicon Mac:** standalone app + VST3 + CLAP. Open **SlopStretch.app**.
+
+The **Desktop** ZIPs contain both standalone and VST3; separate packages are there
+if you prefer your pudding compartmentalised. Each includes **START-HERE.txt**
+with installation steps. Your operating system now has unresolved feelings.
 
 There is already a three-second demo inside. Press **Release the Slop**.
 Congratulations. The room now has a backstory.
@@ -156,11 +163,15 @@ The browser version is a visual preview; it does not play or process audio.
 **Does selecting a preset replace my sample?** No. Your sample keeps its job.
 Its working conditions may change substantially.
 
-**Is this a finished commercial release?** This is **v0.1.0**, a local Apple Silicon
-Mac development build with ad-hoc signing. Native playback, WAV loading/export,
-automated checks, and plugin validators have been exercised. It is not notarized
-or qualified in a DAW yet, and a full three-hour render has not been tested.
-Windows, Linux, Intel Mac, AU, and AAX builds are not supplied in this version.
+**Is this a finished commercial release?** This is **v0.1.0**, an early prerelease.
+Windows and Linux native builds, automated tests, offline audio rendering, and
+VST3 loading/processing checks pass. Interactive playback and file dialogs have
+been exercised on Mac; Windows/Linux audio-device and DAW testing remain outstanding.
+Mac builds are ad-hoc signed and not notarized; Windows builds are unsigned and
+need the [Microsoft Visual C++ v14 runtime (x64)](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist/).
+Linux needs glibc 2.39 or newer, ALSA, X11/XWayland, OpenGL, Wayland client libraries,
+and a desktop portal for file dialogs. No platform is DAW-qualified yet, and a full
+three-hour render has not been tested. Intel Mac, AU, and AAX are not supplied.
 [The unfunny details live here.](docs/verification.md)
 
 **Keyboard snacks:** `Space` play/pause · `L` load · `C` capture · `F` freeze ·
