@@ -1,17 +1,17 @@
-<div align="center">
+<div align="center" style="border-bottom:1px dashed purple">
 
-# 🫠 SlopStretch
+<h1>🫠 SlopStretch</h1>
+<h3>A LITTLE AUDIO. AN UNREASONABLE AMOUNT OF FEELING.</h3>
 
-### A LITTLE AUDIO. AN UNREASONABLE AMOUNT OF FEELING.
-
-**Turn 3 seconds of audio into 3 hours of unresolved feelings.**
+<p>Turn 3 seconds of audio into 3 hours of unresolved feelings.<p>
 
 VST3 · CLAP · Standalone<br>
-1–3,600× stretch · nine emotional starting points · absolutely enormous buttons
+<em>1–3,600× stretch · nine emotional starting points · absolutely enormous buttons</em>
 
 *For producers who want ambience, but with consequences.*
 
 </div>
+
 
 ![SlopStretch's purple-and-pink native editor, with a selectable waveform, giant SLOP knob, spectral nebula, and sound-shaping controls](docs/verification/native-final.png)
 
